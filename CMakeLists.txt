@@ -17,7 +17,7 @@ include(GNUInstallDirs)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
 find_package(Threads REQUIRED)
-find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
+find_package(Python REQUIRED COMPONENTS Interpreter Development.Module NumPy)
 
 include(fetch_hdf5)
 include(fetch_sqlite3)

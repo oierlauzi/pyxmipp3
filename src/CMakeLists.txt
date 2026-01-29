@@ -14,6 +14,7 @@ target_link_libraries(
     PRIVATE 
         Threads::Threads
         Python::Module
+        Python::NumPy
         sqlite3
         HDF5::CXX
         HDF5::HDF5
