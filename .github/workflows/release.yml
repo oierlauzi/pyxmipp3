@@ -39,8 +39,7 @@ jobs:
         uses: pypa/cibuildwheel@v3.3.1
         env:
           CIBW_ARCHS: "${{ matrix.architectures }}"
-          CIBW_TEST_SKIP: "*-win_arm64" # Windows on ARM cannot be tested, raises warning
-          CIBW_SKIP: "cp3??t-win*" # Skip Python free-threaded builds on Windows
+          CIBW_SKIP: "cp3??t-*"
           CIBW_REPAIR_WHEEL_COMMAND_LINUX: >
             auditwheel repair -w {dest_dir} {wheel} 
           CIBW_REPAIR_WHEEL_COMMAND_MACOS: >
