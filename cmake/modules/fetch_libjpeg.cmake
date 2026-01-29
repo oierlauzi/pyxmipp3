@@ -1,0 +1,38 @@
+cmake_minimum_required(VERSION 3.16)
+
+include(ExternalProject)
+
+function(fetch_libjpeg)
+	set(JPEG_INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/external/libjpeg-turbo)
+	set(JPEG_INCLUDE_DIR ${JPEG_INSTALL_DIR}/include)
+	file(MAKE_DIRECTORY ${JPEG_INCLUDE_DIR})
+
+	cmake_policy(SET CMP0135 NEW) # To avoid warnings
+	ExternalProject_Add(
+		libjpeg_external
+		URL https://github.com/libjpeg-turbo/libjpeg-turbo/archive/refs/tags/3.1.3.tar.gz
+		PREFIX ${CMAKE_CURRENT_BINARY_DIR}/jpeg_build
+    	INSTALL_DIR ${JPEG_INSTALL_DIR}
+		CMAKE_ARGS
+			-DCMAKE_INSTALL_PREFIX=${JPEG_INSTALL_DIR}
+			-DWITH_SIMD=OFF
+			-DWITH_TURBOJPEG=OFF
+			-DENABLE_SHARED=OFF
+			-DENABLE_STATIC=ON
+			-DPOSITION_INDEPENDENT_CODE=ON
+			-DCMAKE_BUILD_TYPE=Release
+		
+		LOG_DOWNLOAD ON
+		LOG_CONFIGURE ON
+		LOG_BUILD ON
+	)
+
+	set(JPEG_LIBRARY ${JPEG_INSTALL_DIR}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}jpeg${CMAKE_STATIC_LIBRARY_SUFFIX})
+	add_library(JPEG::JPEG STATIC IMPORTED)
+	set_target_properties(JPEG::JPEG PROPERTIES
+		IMPORTED_LOCATION ${JPEG_LIBRARY}
+		INTERFACE_INCLUDE_DIRECTORIES ${JPEG_INCLUDE_DIR}
+	)
+
+	add_dependencies(JPEG::JPEG libjpeg_external)
+endfunction()

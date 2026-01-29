@@ -8,5 +8,7 @@ function(fetch_hdf5)
         hdf5
 		URL https://github.com/HDFGroup/hdf5/archive/refs/tags/hdf5-1_10_11.tar.gz
 	)
+
+	set(HDF5_BUILD_CPP_LIB ON CACHE BOOL "" FORCE)
 	FetchContent_MakeAvailable(hdf5)
 endfunction()

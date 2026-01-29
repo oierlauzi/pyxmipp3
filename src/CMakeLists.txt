@@ -16,11 +16,14 @@ target_link_libraries(
         Threads::Threads
         Python::Module
         hdf5-static
+        hdf5_cpp-static
         sqlite3
         fftw
         fftw_threads
         fftw3f 
         fftw3f_threads
+        JPEG::JPEG
+        TIFF::tiff
 )
 target_include_directories(
     xmippLib 
