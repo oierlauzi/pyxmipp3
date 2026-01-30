@@ -87,4 +87,3 @@ jobs:
 
       - name: Test installation
         run: python -c "import xmippLib"
-      
