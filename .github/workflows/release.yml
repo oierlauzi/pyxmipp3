@@ -39,7 +39,7 @@ jobs:
         uses: pypa/cibuildwheel@v3.3.1
         env:
           CIBW_ARCHS: "${{ matrix.architectures }}"
-          CIBW_SKIP: "cp3??t-* pp* *musllinux*"
+          CIBW_SKIP: "cp3??t-* *musllinux*"
           CIBW_TEST_COMMAND: "python -c \"import xmippLib\""
           CIBW_REPAIR_WHEEL_COMMAND_LINUX: >
             auditwheel repair -w {dest_dir} {wheel} 
