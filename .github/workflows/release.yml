@@ -80,7 +80,7 @@ jobs:
       name: pypi
       url: https://pypi.org/p/pyxmipp3
     permissions:
-      id-token:
+      id-token: write
     steps:
       - uses: actions/download-artifact@v7
         with:
